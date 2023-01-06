@@ -5,13 +5,6 @@ export default class RegisterForm extends Component {
   render() {
     return (
       <div className="register-form">
-        <h1
-          onClick={() => {
-            window.location.href = "http://localhost:3000/";
-          }}
-        >
-          Logo
-        </h1>
         <form>
           <label>Register</label>
           <label htmlFor="username"></label>
