@@ -6,7 +6,6 @@ const shoesModel = require(`../models/shoes`);
 router.get(`/shoes`, (req, res) => {
   //user does not have to be logged in to see car details
   shoesModel.find((error, data) => {
-    res.header("Access-Control-Allow-Origin", "*");
     res.json(data);
   });
 });
@@ -14,7 +13,6 @@ router.get(`/shoes`, (req, res) => {
 // Read one record
 router.get(`/shoes/:id`, (req, res) => {
   shoesModel.findById(req.params.id, (error, data) => {
-    res.header("Access-Control-Allow-Origin", "*");
     res.json(data);
   });
 });
@@ -22,7 +20,6 @@ router.get(`/shoes/:id`, (req, res) => {
 // Add new record
 router.post(`/shoes`, (req, res) => {
   shoesModel.create(req.body, (error, data) => {
-    res.header("Access-Control-Allow-Origin", "*");
     res.json(data);
   });
 });

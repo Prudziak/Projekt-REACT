@@ -113,6 +113,34 @@ header > a,
   text-decoration: none;
   color: rgb(46, 151, 180);
 }
+
+.burger-link {
+  text-align: center;
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  font-size: 20px;
+  font-weight: 350;
+  font-family: "Roboto", sans-serif;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  border-bottom: 1px solid #ccc;
+  border-bottom-width: auto;
+  border-bottom-style: solid;
+}
+
+.cart-link {
+  text-align: center;
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  font-size: 20px;
+  font-weight: 350;
+  font-family: "Roboto", sans-serif;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+}
+
 .register-form {
   justify-content: center;
   border-radius: 6px;
@@ -180,45 +208,78 @@ header > a,
 .burger ul {
   position: absolute;
   top: 0;
-  right: 100px;
+  right: 150px;
   width: 100%;
   height: 100%;
-  border-radius: 10px;
-  border-color: aqua;
-  z-index: -1;
+  z-index: top;
   transition: 0.2s;
+}
+
+.burger li {
+  display: block;
+  width: 120px;
+  height: auto;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0px 0px 12px #aaa, -0px -0px 12px #fff;
+  margin: 10px 0;
+  right: 150px;
+  z-index: top;
 }
 
 .shop-mainpage {
   justify-content: center;
   border-radius: 6px;
-  display: flex;
+  display: grid;
   margin-inline: auto;
-  width: 100px;
+  width: auto;
   height: auto;
 }
 
-.shop-mainpage label {
+.shop-mainpage-title {
+  justify-content: center;
   text-align: center;
-  display: block;
+  display: flex;
   width: 100%;
   margin: 10px 0;
   font-family: "Segoe UI";
   font-style: normal;
   font-weight: 300;
   font-size: 92px;
-  line-height: 122px;
+  line-height: 100px;
   color: #343434;
 }
 
-.shop-mainpage > .shop-mainpage-content button {
+.shop-mainpage-content-center {
+  justify-content: center;
+  display: grid;
+}
+
+.display-categories-buttons {
+  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: auto;
+  margin: 10px 0;
+  font-family: "Segoe UI";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 50px;
+  line-height: 80px;
+  color: #343434;
+  align-items: center;
+}
+
+.category-button {
+  justify-content: center;
   margin: 5px 5px;
   background: #fff;
   border-color: #fff;
-  position: relative;
-  width: 400px;
+  width: 300px;
   height: 60px;
-  display: block;
+  display: inline-block;
+  /* grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr); */
   padding: 15px auto;
   font-size: 24px;
   cursor: pointer;
@@ -227,7 +288,7 @@ header > a,
   outline: none;
   color: #333;
   border: none;
-  border-radius: 2px;
+  border-radius: 20px;
   box-shadow: 0px 0px 12px #aaa, -0px -0px 12px #fff;
 }
 
@@ -241,7 +302,7 @@ header > a,
   transform: translateY(4px);
 }
 
-.column {
+/* .column {
   float: left;
   width: 50%;
   padding: 5px;
@@ -249,7 +310,7 @@ header > a,
 
 .row {
   display: flex;
-}
+} */
 
 .burger {
   position: absolute;
@@ -272,6 +333,10 @@ header > a,
   border: none;
 }
 
+.burger > ul {
+  right: 175px;
+}
+
 .green-button,
 .red-button {
   padding: 7px 10px;
@@ -292,23 +357,40 @@ header > a,
   background-color: red;
 }
 
+.prod_label {
+  text-align: center;
+  display: grid;
+  width: 100%;
+  height: auto;
+  margin: 10px 0;
+  font-family: "Segoe UI";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 50px;
+  line-height: 80px;
+  color: #343434;
+  border-bottom: #333;
+  border-bottom-width: 100%;
+  border-bottom-style: solid;
+}
+
 .card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 180px;
+  width: 200px;
   height: auto;
   padding: 15px;
   box-sizing: border-box;
   box-shadow: 0px 0px 20px #aaa, -0px -0px 12px #fff;
-  border-radius: 6px;
+  border-radius: 20px;
   background: #fefdfdee;
   margin: 10px;
 }
 
 .shoe_card {
-  height: 150px;
-  width: 100px;
+  height: auto;
+  width: auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* Creates 3 equal-width columns */
   grid-gap: 50px; /* Adds space between the columns */
@@ -321,6 +403,15 @@ header > a,
   object-fit: cover;
   padding: 15px;
   aspect-ratio: 3/2;
+  border-radius: 20px;
+}
+
+.display-shoes {
+  justify-content: center;
+  display: grid;
+  gap: 10px;
+  width: 100%;
+  height: auto;
 }
 
 .shoe_display {
@@ -331,4 +422,51 @@ header > a,
   align-items: center;
   align-content: center;
   margin: 10px;
+}
+
+.container > h4 {
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 1.5;
+  margin: 3px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.shoe-p {
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 1.5;
+  margin: 3px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.shoe-price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.5;
+  margin: 3px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.prod-link {
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 1.5;
+  margin: 3px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  text-decoration: none;
+  color: black;
 }

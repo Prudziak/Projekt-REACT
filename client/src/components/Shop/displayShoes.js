@@ -27,33 +27,29 @@ export default class DisplayShoes extends Component {
   render() {
     return (
       <div className="display-shoes">
-        <div className="display-shoes-content">
-          <div className="display-shoes-content-center">
-            <div className="display-shoes-title">
-              <label>Bestsellers</label>
-            </div>
-            <div className="shoe_card">
-              {this.state.shoes.map((shoe) =>
-                shoe.sold_pairs >= 350 ? (
-                  <div className="shoe_display" key={shoe}>
-                    <div className="card">
-                      <img src={shoe.image} alt="shoe" />
-                      <div className="container">
-                        <h4>
-                          <b>{shoe.brand}</b>
-                        </h4>
-                        <p>{shoe.model}</p>
-                        <p>{shoe.colour}</p>
-                        <p>{shoe.price}</p>
-                        <p>{shoe.description}</p>
-                        <Link to={`/shoes/${shoe._id}`}>View</Link>
-                      </div>
+        <div className="display-shoes-title">
+          <label className="prod_label">Bestsellers</label>
+        </div>
+        <div className="shoe_card">
+          {this.state.shoes.map((shoe) =>
+            shoe.sold_pairs >= 350 ? (
+              <Link className="prod-link" to={`/shoes/${shoe._id}`}>
+                <div className="shoe_display" key={shoe}>
+                  <div className="card">
+                    <img src={shoe.image} alt="shoe" />
+                    <div className="container">
+                      <h4>
+                        <b>{shoe.brand}</b>
+                      </h4>
+                      <p className="shoe-p">{shoe.model}</p>
+                      <p className="shoe-p">{shoe.colour}</p>
+                      <p className="shoe-price">{shoe.price} USD</p>
                     </div>
                   </div>
-                ) : null
-              )}
-            </div>
-          </div>
+                </div>
+              </Link>
+            ) : null
+          )}
         </div>
       </div>
     );

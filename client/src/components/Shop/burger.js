@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { Link } from "react-router-dom";
 
 export default class Burger extends Component {
   constructor(props) {
@@ -15,18 +16,27 @@ export default class Burger extends Component {
   };
 
   render() {
-    const menuItems = ["Home", "About", "Contact", "Login"];
+    const menuItems = ["Login", "Register", "Cart"];
 
     return (
       <div className="burger">
         <button onClick={this.handleClick}></button>
         {this.state.menuOpen && (
           <ul>
-            {menuItems.map((item) => (
-              <li key={item}>
-                <a href="#">{item}</a>
-              </li>
-            ))}
+            <li>
+              <Link className="burger-link" to="/login">
+                {" "}
+                Login{" "}
+              </Link>
+              <Link className="burger-link" to="/register">
+                {" "}
+                Register{" "}
+              </Link>
+              <Link className="cart-link" to="/cart">
+                {" "}
+                Cart{" "}
+              </Link>
+            </li>
           </ul>
         )}
       </div>

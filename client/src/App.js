@@ -5,6 +5,7 @@ import RegisterForm from "./components/registerForm";
 import ShopMainpage from "./components/Shop/shopMainpage";
 import Burger from "./components/Shop/burger";
 import AddProd from "./components/Shop/addProd";
+import DisplayProductPage from "./components/Shop/displayProduct";
 
 export default class App extends Component {
   render() {
@@ -23,7 +24,8 @@ export default class App extends Component {
           <Route exact path="/login" element={<LoginForm />} />
           <Route exact path="/register" element={<RegisterForm />} />
           <Route exact path="/shop" element={<ShopMainpage />} />
-          <Route exact path="/addcar" element={<AddProd />} />
+          <Route exact path="/addprod" element={<AddProd />} />
+          <Route exact path="/products" element={<DisplayProductPage />} />
         </Routes>
       </BrowserRouter>
     );
