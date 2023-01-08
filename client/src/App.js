@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import LoginForm from "./components/loginForm";
 import RegisterForm from "./components/registerForm";
 import ShopMainpage from "./components/Shop/shopMainpage";
@@ -19,14 +19,14 @@ export default class App extends Component {
           ></h1>
         </div>
         <Burger />
-        <Routes>
-          <Route exact path="/" element={<ShopMainpage />} />
-          <Route exact path="/login" element={<LoginForm />} />
-          <Route exact path="/register" element={<RegisterForm />} />
-          <Route exact path="/shop" element={<ShopMainpage />} />
-          <Route exact path="/addprod" element={<AddProd />} />
-          <Route exact path="/products" element={<DisplayProductPage />} />
-        </Routes>
+        <Switch>
+          <Route exact path="/" component={ShopMainpage} />
+          <Route exact path="/login" component={LoginForm} />
+          <Route exact path="/register" component={RegisterForm} />
+          <Route exact path="/shop" component={ShopMainpage} />
+          <Route exact path="/addcar" component={AddProd} />
+          <Route exact path="/shoes/:brand" component={DisplayProductPage} />
+        </Switch>
       </BrowserRouter>
     );
   }

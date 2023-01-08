@@ -1,7 +1,15 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import DisplayProductPage from "./displayProduct";
 
 export default class DisplayCategories extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      current_category: "",
+    };
+  }
+
   render() {
     const buttons = [
       "Nike",
@@ -21,8 +29,25 @@ export default class DisplayCategories extends Component {
         </div>
         <div className="display-categories-buttons">
           {buttons.map((button) => (
-            <Link to={`/shoes/${button}`} key={button}>
-              <button className="category-button"> {button}</button>
+            <Link
+              to={{
+                pathname: `/shoes/${button}`,
+                query: { current_category: button },
+              }}
+              key={button}
+            >
+              <button
+                onClick={() => {
+                  this.state.current_category = button;
+                  console.log(this.state.current_category);
+                  console.log(button);
+                  console.log(this.state);
+                }}
+                className="category-button"
+              >
+                {" "}
+                {button}
+              </button>
             </Link>
           ))}
         </div>

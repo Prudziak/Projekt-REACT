@@ -13,11 +13,11 @@ export default class ShopMainpage extends Component {
               <label>Sneakers Store</label>
             </div>
 
-            {/* <div className="add-new-car">
-                <Link className="blue-button" to={"/addcar"}>
-                  Add New Car
-                </Link>
-              </div> */}
+            <div className="add-new-car">
+              <Link className="blue-button" to={"/addcar"}>
+                Add New Car
+              </Link>
+            </div>
             <DisplayCategories />
           </div>
           <DisplayShoes />

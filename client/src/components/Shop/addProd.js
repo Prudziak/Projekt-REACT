@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Navigate, Link } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 
 import axios from "axios";
@@ -80,7 +80,7 @@ export default class AddProd extends Component {
 
     return (
       <div className="form-container">
-        {this.state.redirectToDisplayAllCars ? <Navigate to="/shop" /> : null}
+        {this.state.redirectToDisplayAllCars ? <Redirect to="/shop" /> : null}
 
         {errorMessage}
 

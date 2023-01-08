@@ -33,7 +33,7 @@ export default class DisplayShoes extends Component {
         <div className="shoe_card">
           {this.state.shoes.map((shoe) =>
             shoe.sold_pairs >= 350 ? (
-              <Link className="prod-link" to={`/shoes/${shoe._id}`}>
+              <Link className="prod-link" to={`/shoes/prod/${shoe._id}`}>
                 <div className="shoe_display" key={shoe}>
                   <div className="card">
                     <img src={shoe.image} alt="shoe" />

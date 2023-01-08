@@ -1,15 +1,14 @@
 import React, { Component } from "react";
-import DisplayCategories from "./displayCategories";
 import axios from "axios";
 import { SERVER_HOST } from "../../config/global_constants";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
-export default class DisplayProductPage extends Component {
+class DisplayProductPage extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       shoes: [],
+      current_category: this.props.location.query.current_category,
     };
   }
 
@@ -18,7 +17,9 @@ export default class DisplayProductPage extends Component {
       .get(`${SERVER_HOST}/shoes`)
       .then((res) => {
         const shoes = res.data;
-        const nikeShoes = shoes.filter((shoe) => shoe.brand === "Nike");
+        const nikeShoes = shoes.filter(
+          (shoe) => shoe.brand === this.state.current_category
+        );
         this.setState({ shoes: nikeShoes });
       })
       .catch((err) => {
@@ -51,3 +52,5 @@ export default class DisplayProductPage extends Component {
     );
   }
 }
+
+export default withRouter(DisplayProductPage);
