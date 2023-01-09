@@ -9,6 +9,7 @@ class DisplayProductPage extends Component {
     this.state = {
       shoes: [],
       current_category: this.props.location.query.current_category,
+      current_id: "",
     };
   }
 
@@ -31,22 +32,28 @@ class DisplayProductPage extends Component {
     return (
       <div className="display">
         {this.state.shoes.map((shoe) => (
-          <div className="shoe_display" key={shoe}>
-            <div className="card">
-              <img src={shoe.image} alt="shoe" />
-              <div className="container">
-                <h4>
-                  <b>{shoe.brand}</b>
-                </h4>
-                <p className="shoe-p">{shoe.model}</p>
-                <p className="shoe-p">{shoe.colour}</p>
-                <p className="shoe-price">{shoe.price} USD</p>
-                <Link className="prod-link" to={`/shoes/${shoe._id}`}>
-                  View
-                </Link>
+          <Link
+            className="prod-link"
+            to={{
+              pathname: `/shoes/prod/${shoe._id}`,
+              query: { current_id: shoe._id },
+            }}
+            key={shoe}
+          >
+            <div className="shoe_display" key={shoe}>
+              <div className="card">
+                <img src={shoe.image} alt="shoe" />
+                <div className="container">
+                  <h4>
+                    <b>{shoe.brand}</b>
+                  </h4>
+                  <p className="shoe-p">{shoe.model}</p>
+                  <p className="shoe-p">{shoe.colour}</p>
+                  <p className="shoe-price">{shoe.price} USD</p>
+                </div>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     );

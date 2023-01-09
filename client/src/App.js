@@ -6,6 +6,7 @@ import ShopMainpage from "./components/Shop/shopMainpage";
 import Burger from "./components/Shop/burger";
 import AddProd from "./components/Shop/addProd";
 import DisplayProductPage from "./components/Shop/displayProduct";
+import ProductDetails from "./components/Shop/productDetails";
 
 export default class App extends Component {
   render() {
@@ -26,6 +27,7 @@ export default class App extends Component {
           <Route exact path="/shop" component={ShopMainpage} />
           <Route exact path="/addcar" component={AddProd} />
           <Route exact path="/shoes/:brand" component={DisplayProductPage} />
+          <Route exact path="/shoes/prod/:id" component={ProductDetails} />
         </Switch>
       </BrowserRouter>
     );

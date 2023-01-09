@@ -10,6 +10,7 @@ export default class DisplayShoes extends Component {
 
     this.state = {
       shoes: [],
+      current_id: "",
     };
   }
 
@@ -33,7 +34,14 @@ export default class DisplayShoes extends Component {
         <div className="shoe_card">
           {this.state.shoes.map((shoe) =>
             shoe.sold_pairs >= 350 ? (
-              <Link className="prod-link" to={`/shoes/prod/${shoe._id}`}>
+              <Link
+                onClick={localStorage.setItem("wiadomosc", shoe._id)}
+                className="prod-link"
+                to={{
+                  pathname: `/shoes/prod/${shoe._id}`,
+                  query: { current_id: shoe._id },
+                }}
+              >
                 <div className="shoe_display" key={shoe}>
                   <div className="card">
                     <img src={shoe.image} alt="shoe" />
