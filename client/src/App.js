@@ -7,6 +7,8 @@ import Burger from "./components/Shop/burger";
 import AddProd from "./components/Shop/addProd";
 import DisplayProductPage from "./components/Shop/displayProduct";
 import ProductDetails from "./components/Shop/productDetails";
+import Logout from "./components/Shop/logout";
+import LoggedInRoute from "./components/Shop/LoggedInRoute";
 
 export default class App extends Component {
   render() {
@@ -28,6 +30,7 @@ export default class App extends Component {
           <Route exact path="/addcar" component={AddProd} />
           <Route exact path="/shoes/:brand" component={DisplayProductPage} />
           <Route exact path="/shoes/prod/:id" component={ProductDetails} />
+          <LoggedInRoute exact path="/logout" component={Logout} />
         </Switch>
       </BrowserRouter>
     );

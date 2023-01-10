@@ -11,6 +11,7 @@ let shoesSchema = new mongoose.Schema(
   },
   {
     collection: `shoes`,
+    versionKey: false,
   }
 );
 

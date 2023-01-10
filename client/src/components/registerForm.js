@@ -1,50 +1,128 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import axios from "axios";
+import { SERVER_HOST } from "../config/global_constants";
+import LinkInClass from "./LinkInClass";
 
 export default class RegisterForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "",
+      email: "",
+      password: "",
+      firstname: "",
+      lastname: "",
+      address: "",
+      isRegistered: false,
+    };
+  }
+
+  handleChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    axios.defaults.withCredentials = true;
+    let url = `${SERVER_HOST}/users/register/${this.state.username}/${this.state.email}/${this.state.password}/${this.state.firstname}/${this.state.lastname}/${this.state.address}`;
+    // axios.post(url).then((res) => {
+    //   if (res.data) {
+    //     if (res.data.errorMessage) {
+    //       console.log(res.data.errorMessage);
+    //     } else {
+    //       console.log("User registered and logged in successfully");
+    //       sessionStorage.username = res.data.username;
+    //       sessionStorage.accessLevel = res.data.accessLevel;
+    //       this.setState({ isRegistered: true });
+    //     }
+    //   } else {
+    //     console.log("Registration failed");
+    //   }
+    // });
+    axios
+      .post(url)
+      .then((res) => {
+        if (res.data) {
+          if (res.data.errorMessage) {
+            console.log(res.data.errorMessage);
+          } else {
+            console.log("User logged in");
+            sessionStorage.username = res.data.username;
+            sessionStorage.accessLevel = res.data.accessLevel;
+            this.setState({ isRegistered: true });
+          }
+        } else {
+          console.log("Failed");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   render() {
     return (
       <div className="register-form">
-        <form>
+        <form noValidate={true}>
+          {this.state.isRegistered ? <Redirect to="/shop" /> : null}
           <label>Register</label>
           <label htmlFor="username"></label>
           <input
             type="text"
             name="username"
-            id="username"
             placeholder="Username"
+            value={this.state.username}
+            onChange={this.handleChange}
+            ref={(input) => {
+              this.inputToFocus = input;
+            }}
           />
           <label htmlFor="email"></label>
-          <input type="email" name="email" id="email" placeholder="Email" />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={this.state.email}
+            onChange={this.handleChange}
+          />
           <label htmlFor="password"></label>
           <input
             type="password"
             name="password"
-            id="password"
             placeholder="Password"
+            value={this.state.password}
+            onChange={this.handleChange}
           />
           <label htmlFor="FirstName"></label>
           <input
             type={"text"}
-            name={"FirstName"}
-            id={"FirstName"}
+            name={"firstname"}
             placeholder={"First Name"}
+            value={this.state.firstname}
+            onChange={this.handleChange}
           />
           <label htmlFor="LastName"></label>
           <input
             type={"text"}
-            name={"LastName"}
-            id={"LastName"}
+            name={"lastname"}
             placeholder={"Last Name"}
+            value={this.state.lastname}
+            onChange={this.handleChange}
           />
           <label htmlFor="Address"></label>
           <input
             type={"text"}
-            name={"Address"}
-            id={"Address"}
+            name={"address"}
             placeholder={"Address"}
+            value={this.state.address}
+            onChange={this.handleChange}
           />
-          <button type="submit">Register</button>
+          <LinkInClass
+            value="Register"
+            className="normal-button"
+            onClick={this.handleSubmit}
+          />
           <Link className="login-link" to="/login">
             {" "}
             Go back to login{" "}

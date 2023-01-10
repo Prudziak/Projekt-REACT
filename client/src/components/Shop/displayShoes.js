@@ -18,7 +18,9 @@ export default class DisplayShoes extends Component {
     axios
       .get(`${SERVER_HOST}/shoes`)
       .then((res) => {
-        this.setState({ shoes: res.data });
+        const shoes = res.data;
+        const bestsellers = shoes.filter((shoe) => shoe.sold_pairs >= 350);
+        this.setState({ shoes: bestsellers });
       })
       .catch((err) => {
         console.log(err);
@@ -32,32 +34,30 @@ export default class DisplayShoes extends Component {
           <label className="prod_label">Bestsellers</label>
         </div>
         <div className="shoe_card">
-          {this.state.shoes.map((shoe) =>
-            shoe.sold_pairs >= 350 ? (
-              <Link
-                onClick={localStorage.setItem("wiadomosc", shoe._id)}
-                className="prod-link"
-                to={{
-                  pathname: `/shoes/prod/${shoe._id}`,
-                  query: { current_id: shoe._id },
-                }}
-              >
-                <div className="shoe_display" key={shoe}>
-                  <div className="card">
-                    <img src={shoe.image} alt="shoe" />
-                    <div className="container">
-                      <h4>
-                        <b>{shoe.brand}</b>
-                      </h4>
-                      <p className="shoe-p">{shoe.model}</p>
-                      <p className="shoe-p">{shoe.colour}</p>
-                      <p className="shoe-price">{shoe.price} USD</p>
-                    </div>
+          {this.state.shoes.map((shoe) => (
+            <Link
+              className="prod-link"
+              to={{
+                pathname: `/shoes/prod/${shoe._id}`,
+                query: { current_id: shoe._id },
+              }}
+              key={shoe._id}
+            >
+              <div className="shoe_display">
+                <div className="card">
+                  <img src={shoe.image} alt="shoe" />
+                  <div className="container">
+                    <h4>
+                      <b>{shoe.brand}</b>
+                    </h4>
+                    <p className="shoe-p">{shoe.model}</p>
+                    <p className="shoe-p">{shoe.colour}</p>
+                    <p className="shoe-price">{shoe.price} USD</p>
                   </div>
                 </div>
-              </Link>
-            ) : null
-          )}
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
     );

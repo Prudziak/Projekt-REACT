@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { SERVER_HOST } from "../../config/global_constants";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
+import Logout from "./logout";
+import { ACCESS_LEVEL_GUEST } from "../../config/global_constants";
 
 class DisplayProductPage extends Component {
   constructor(props) {
@@ -30,34 +32,44 @@ class DisplayProductPage extends Component {
 
   render() {
     return (
-      <div className="display">
-        {this.state.shoes.map((shoe) => (
-          <Link
-            className="prod-link"
-            to={{
-              pathname: `/shoes/prod/${shoe._id}`,
-              query: { current_id: shoe._id },
-            }}
-            key={shoe}
-          >
-            <div className="shoe_display" key={shoe}>
-              <div className="card">
-                <img src={shoe.image} alt="shoe" />
-                <div className="container">
-                  <h4>
-                    <b>{shoe.brand}</b>
-                  </h4>
-                  <p className="shoe-p">{shoe.model}</p>
-                  <p className="shoe-p">{shoe.colour}</p>
-                  <p className="shoe-price">{shoe.price} USD</p>
+      <div className="page">
+        <div className="user-info">
+          {sessionStorage.accessLevel > ACCESS_LEVEL_GUEST ? (
+            <div className="welcome">
+              <h5>Welcome {sessionStorage.username}</h5>
+              <Logout />
+            </div>
+          ) : null}
+        </div>
+        <div className="all-shoes">
+          {this.state.shoes.map((shoe) => (
+            <Link
+              className="prod-link"
+              to={{
+                pathname: `/shoes/prod/${shoe._id}`,
+                query: { current_id: shoe._id },
+              }}
+              key={shoe._id}
+            >
+              <div className="shoe_display">
+                <div className="card">
+                  <img src={shoe.image} alt="shoe" />
+                  <div className="container">
+                    <h4>
+                      <b>{shoe.brand}</b>
+                    </h4>
+                    <p className="shoe-p">{shoe.model}</p>
+                    <p className="shoe-p">{shoe.colour}</p>
+                    <p className="shoe-price">{shoe.price} USD</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          ))}
+        </div>
       </div>
     );
   }
 }
 
-export default withRouter(DisplayProductPage);
+export default DisplayProductPage;
