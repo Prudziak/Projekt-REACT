@@ -10,7 +10,7 @@ export default class ProductDetails extends Component {
     super(props);
     this.state = {
       shoe: [],
-      current_id: this.props.location.query.current_id,
+      current_id: sessionStorage.getItem("current_id"),
     };
   }
 

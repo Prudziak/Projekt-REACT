@@ -30,7 +30,7 @@ export default class Logout extends Component {
 
   render() {
     return (
-      <div>
+      <div className="logout-button">
         {!this.state.isLogged ? <Redirect to="/login" /> : null}
 
         <LinkInClass

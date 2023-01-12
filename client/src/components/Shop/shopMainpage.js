@@ -23,7 +23,7 @@ export default class ShopMainpage extends Component {
 
             <div className="add-new-car">
               <Link className="blue-button" to={"/addcar"}>
-                Add New Car
+                Add New But
               </Link>
             </div>
             <DisplayCategories />

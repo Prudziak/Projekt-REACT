@@ -10,7 +10,7 @@ class DisplayProductPage extends Component {
     super(props);
     this.state = {
       shoes: [],
-      current_category: this.props.location.query.current_category,
+      current_category: sessionStorage.getItem("current_category"),
       current_id: "",
     };
   }
@@ -36,7 +36,7 @@ class DisplayProductPage extends Component {
         <div className="user-info">
           {sessionStorage.accessLevel > ACCESS_LEVEL_GUEST ? (
             <div className="welcome">
-              <h5>Welcome {sessionStorage.username}</h5>
+              <h5>Welcome {sessionStorage.username} </h5>
               <Logout />
             </div>
           ) : null}
@@ -44,10 +44,13 @@ class DisplayProductPage extends Component {
         <div className="all-shoes">
           {this.state.shoes.map((shoe) => (
             <Link
+              onClick={() => {
+                sessionStorage.setItem("current_id", shoe._id);
+              }}
               className="prod-link"
               to={{
                 pathname: `/shoes/prod/${shoe._id}`,
-                query: { current_id: shoe._id },
+                // query: { current_id: shoe._id },
               }}
               key={shoe._id}
             >

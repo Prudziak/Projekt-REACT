@@ -36,10 +36,13 @@ export default class DisplayShoes extends Component {
         <div className="shoe_card">
           {this.state.shoes.map((shoe) => (
             <Link
+              onClick={() => {
+                sessionStorage.setItem("current_id", shoe._id);
+              }}
               className="prod-link"
               to={{
                 pathname: `/shoes/prod/${shoe._id}`,
-                query: { current_id: shoe._id },
+                // query: { current_id: shoe._id },
               }}
               key={shoe._id}
             >
