@@ -19,21 +19,6 @@ export default class Burger extends Component {
     }));
   };
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-
-    axios
-      .post(`${SERVER_HOST}/users/logout`)
-      .then((res) => {
-        sessionStorage.clear();
-        sessionStorage.accessLevel = ACCESS_LEVEL_GUEST;
-        this.setState({ loggedOut: true });
-      })
-      .catch((err) => {
-        console.log("Logout failed");
-      });
-  };
-
   render() {
     return sessionStorage.accessLevel > ACCESS_LEVEL_GUEST ? (
       <div className="burger">
