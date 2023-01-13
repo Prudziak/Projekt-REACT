@@ -9,6 +9,8 @@ import DisplayProductPage from "./components/Shop/displayProduct";
 import ProductDetails from "./components/Shop/productDetails";
 import Logout from "./components/Shop/logout";
 import LoggedInRoute from "./components/Shop/LoggedInRoute";
+import Cart from "./components/Cart/Cart";
+import logo from "./images/logo.png";
 
 export default class App extends Component {
   render() {
@@ -19,7 +21,9 @@ export default class App extends Component {
             onClick={() => {
               window.location.href = "http://localhost:3000/";
             }}
-          ></h1>
+          >
+            <img className="shop-icon" src={require("./images/logo.png")} />
+          </h1>
         </div>
         <Burger />
         <Switch>
@@ -30,6 +34,7 @@ export default class App extends Component {
           <Route exact path="/addcar" component={AddProd} />
           <Route exact path="/shoes/:brand" component={DisplayProductPage} />
           <Route exact path="/shoes/prod/:id" component={ProductDetails} />
+          <Route exact path="/cart" component={Cart} />
           <LoggedInRoute exact path="/logout" component={Logout} />
         </Switch>
       </BrowserRouter>

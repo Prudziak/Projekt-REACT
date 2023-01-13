@@ -19,8 +19,8 @@ export default class Logout extends Component {
     axios
       .post(`${SERVER_HOST}/users/logout`)
       .then((res) => {
-        sessionStorage.clear();
         sessionStorage.accessLevel = ACCESS_LEVEL_GUEST;
+        sessionStorage.username = "GUEST";
         this.setState({ isLogged: false });
       })
       .catch((err) => {

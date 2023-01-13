@@ -3,7 +3,6 @@ import { Link, Redirect } from "react-router-dom";
 import { ACCESS_LEVEL_GUEST } from "../../config/global_constants";
 import axios from "axios";
 import { SERVER_HOST } from "../../config/global_constants";
-import LinkInClass from "../LinkInClass";
 
 export default class Burger extends Component {
   constructor(props) {
@@ -38,7 +37,12 @@ export default class Burger extends Component {
   render() {
     return sessionStorage.accessLevel > ACCESS_LEVEL_GUEST ? (
       <div className="burger">
-        <button onClick={this.handleClick}></button>
+        <button className="brgr-button" onClick={this.handleClick}>
+          <img
+            className="burger-image"
+            src={require("../../images/burger.png")}
+          />
+        </button>
         {this.state.menuOpen && (
           <ul>
             <li>
@@ -52,7 +56,12 @@ export default class Burger extends Component {
       </div>
     ) : (
       <div className="burger">
-        <button onClick={this.handleClick}></button>
+        <button className="brgr-button" onClick={this.handleClick}>
+          <img
+            className="burger-image"
+            src={require("../../images/burger.png")}
+          />
+        </button>
         {this.state.menuOpen && (
           <ul>
             <li>

@@ -49,7 +49,8 @@ export default class AddProduct extends Component {
   };
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form className="add-shoe-form" onSubmit={this.handleSubmit}>
+        <h2>Add new product</h2>
         <label>
           Brand:
           <input
@@ -100,7 +101,7 @@ export default class AddProduct extends Component {
         </label>
         <br />
         <label>
-          ImageURL:
+          Link to image:
           <input
             type="text"
             name="image"
@@ -109,7 +110,11 @@ export default class AddProduct extends Component {
           />
         </label>
         <br />
-        <button type="submit">Add Product</button>
+        <button type="submit">
+          <Link className="add-prod-link" to="/shop">
+            Add product
+          </Link>
+        </button>
       </form>
     );
   }

@@ -4,6 +4,7 @@ import axios from "axios";
 import { SERVER_HOST } from "../../config/global_constants";
 import Logout from "./logout";
 import { ACCESS_LEVEL_GUEST } from "../../config/global_constants";
+import AddToCart from "./AddToCart";
 
 export default class ProductDetails extends Component {
   constructor(props) {
@@ -21,6 +22,7 @@ export default class ProductDetails extends Component {
       .then((res) => {
         this.setState({ shoe: res.data });
         console.log(res.data);
+        sessionStorage.setItem("product", JSON.stringify(res.data));
       })
       .catch((err) => {
         console.log(err);
@@ -42,21 +44,15 @@ export default class ProductDetails extends Component {
           <img className="details-img" src={this.state.shoe.image} alt="shoe" />
           <div className="details-div">
             <h4>
-              <b>
-                {this.state.shoe.brand} {this.state.shoe.model}
-              </b>
+              {this.state.shoe.brand} {this.state.shoe.model}
             </h4>
             <b>Price</b>
             <p className="shoe-cena">{this.state.shoe.price} USD</p>
             <b>Description</b>
             <p className="shoe-desc">{this.state.shoe.description}</p>
-            <button
-              onClick={() => {
-                console.log(this.state.current_id);
-              }}
-            >
-              Przycisk testowy
-            </button>
+            <div className="add-to-cart">
+              <AddToCart />
+            </div>
           </div>
         </div>
       </div>

@@ -47,7 +47,7 @@ export default class LoginForm extends Component {
     return (
       <div className="login-form">
         <form>
-          <label>Login</label>
+          <label>Log in</label>
           {console.log(this.state.isLogged)}
           {this.state.isLogged ? <Redirect to="/shop" /> : null}
 
@@ -70,7 +70,7 @@ export default class LoginForm extends Component {
             onChange={this.handleChange}
           />
           <LinkInClass
-            value="Login"
+            value="Log in"
             className="normal-button"
             onClick={this.handleSubmit}
           />

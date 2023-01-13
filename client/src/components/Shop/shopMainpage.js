@@ -9,6 +9,9 @@ export default class ShopMainpage extends Component {
   render() {
     return (
       <div className="shop-mainpage">
+        {!sessionStorage.getItem("cart")
+          ? sessionStorage.setItem("cart", JSON.stringify([]))
+          : null}
         <div className="shop-mainpage-content">
           <div className="shop-mainpage-content-center">
             {sessionStorage.accessLevel > ACCESS_LEVEL_GUEST ? (
