@@ -673,14 +673,30 @@ header > a,
   width: 5%;
   height: auto;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   margin-bottom: 50px;
   justify-content: center;
   align-self: auto;
+  align-items: center;
+}
+
+.continue-shopping {
+  border-width: 1px;
+  border-color: gray;
+  border-radius: 15px;
+  width: 110px;
+  height: auto;
+  box-shadow: 0px 0px 20px #aaa, -0px -0px 12px #fff;
 }
 
 .remove-from-cart {
+  border: none;
+  width: 110px;
+  height: auto;
+  font-size: 25px;
   background-color: rgb(187, 98, 47);
+  border-radius: 15px;
+  margin-right: 10px;
 }
 
 .cart-links {

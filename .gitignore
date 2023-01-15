@@ -3,5 +3,3 @@ dist/
 .env
 coverage/
 .vscode/
-./global_constants.js
-./db.js

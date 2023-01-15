@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Checkout from "./Checkout";
 
 export default class Cart extends Component {
   constructor(props) {
     super(props);
     this.state = {
       cart: JSON.parse(sessionStorage.getItem("cart")),
+      total: 0,
     };
   }
 
@@ -18,6 +20,10 @@ export default class Cart extends Component {
   };
 
   render() {
+    this.state.total = this.state.cart.reduce(
+      (total, item) => total + item.price,
+      0
+    );
     return (
       <div className="cart-page">
         {/* {console.log(this.state.cart)} */}
@@ -37,15 +43,11 @@ export default class Cart extends Component {
             ))}
             <div className="cart-summary">
               <h3>Summary</h3>
-              <h3>
-                Total:{" "}
-                {this.state.cart.reduce((total, item) => total + item.price, 0)}{" "}
-                USD
-              </h3>
+              <h3>Total: {this.state.total} USD</h3>
             </div>
             <div className="cart-buttons">
-              <button>Checkout</button>
-              <button>
+              <Checkout total={this.state.total} />
+              <button className="continue-shopping">
                 <Link className="cart-links" to={"/shop"}>
                   Continue shopping
                 </Link>
