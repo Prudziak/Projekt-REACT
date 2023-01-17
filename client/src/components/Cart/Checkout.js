@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { SANDBOX_CLIENT_ID } from "../../config/global_constants";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { Redirect } from "react-router-dom";
+import axios from "axios";
+import { SERVER_HOST } from "../../config/global_constants";
 
 export default class Checkout extends Component {
   constructor(props) {
@@ -32,13 +34,19 @@ export default class Checkout extends Component {
           }}
           onApprove={(data, actions) => {
             return actions.order.capture().then((details) => {
-              //const name = details.payer.name.given_name;
-              sessionStorage.cart = JSON.stringify([]);
-              this.setState({
-                redirectToMessage: true,
-                messageType: "success",
-                orderID: data.orderID,
-              });
+              !sessionStorage.email ? (sessionStorage.email = "guest") : null;
+              axios
+                .post(
+                  `${SERVER_HOST}/sales/${data.orderID}/${sessionStorage.email}/${this.props.products}/${this.props.total}`
+                )
+                .then((res) => {
+                  sessionStorage.cart = JSON.stringify([]);
+                  this.setState({
+                    redirectToMessage: true,
+                    messageType: "success",
+                    orderID: data.orderID,
+                  });
+                });
             });
           }}
           onCancel={(data) => {
@@ -46,6 +54,7 @@ export default class Checkout extends Component {
           }}
           onError={(err) => {
             this.setState({ redirectToMessage: true, messageType: "error" });
+            console.log(err);
           }}
         />
       </PayPalScriptProvider>

@@ -1,10 +1,7 @@
 import React, { Component } from "react";
-import { Redirect, Link } from "react-router-dom";
-import Form from "react-bootstrap/Form";
+import { Link } from "react-router-dom";
 
 import axios from "axios";
-
-import LinkInClass from "../LinkInClass";
 
 import { ACCESS_LEVEL_ADMIN, SERVER_HOST } from "../../config/global_constants";
 
@@ -18,6 +15,7 @@ export default class AddProduct extends Component {
       price: "",
       description: "",
       image: "",
+      stock: "",
     };
   }
 
@@ -41,6 +39,7 @@ export default class AddProduct extends Component {
       price: this.state.price,
       description: this.state.description,
       image: this.state.image,
+      stock: this.state.stock,
     };
 
     axios.post(`${SERVER_HOST}/shoes`, product).then((res) => {
@@ -106,6 +105,16 @@ export default class AddProduct extends Component {
             type="text"
             name="image"
             value={this.state.image}
+            onChange={this.handleChange}
+          />
+        </label>
+        <br />
+        <label>
+          Stock:
+          <input
+            type="number"
+            name="stock"
+            value={this.state.stock}
             onChange={this.handleChange}
           />
         </label>

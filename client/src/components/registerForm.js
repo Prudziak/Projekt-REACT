@@ -26,20 +26,6 @@ export default class RegisterForm extends Component {
     e.preventDefault();
     axios.defaults.withCredentials = true;
     let url = `${SERVER_HOST}/users/register/${this.state.username}/${this.state.email}/${this.state.password}/${this.state.firstname}/${this.state.lastname}/${this.state.address}`;
-    // axios.post(url).then((res) => {
-    //   if (res.data) {
-    //     if (res.data.errorMessage) {
-    //       console.log(res.data.errorMessage);
-    //     } else {
-    //       console.log("User registered and logged in successfully");
-    //       sessionStorage.username = res.data.username;
-    //       sessionStorage.accessLevel = res.data.accessLevel;
-    //       this.setState({ isRegistered: true });
-    //     }
-    //   } else {
-    //     console.log("Registration failed");
-    //   }
-    // });
     axios
       .post(url)
       .then((res) => {
@@ -50,6 +36,7 @@ export default class RegisterForm extends Component {
             console.log("User logged in");
             sessionStorage.username = res.data.username;
             sessionStorage.accessLevel = res.data.accessLevel;
+            sessionStorage.email = this.state.email;
             this.setState({ isRegistered: true });
           }
         } else {

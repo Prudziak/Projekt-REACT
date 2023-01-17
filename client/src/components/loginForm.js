@@ -34,6 +34,7 @@ export default class LoginForm extends Component {
             console.log("User logged in successfully");
             sessionStorage.username = res.data.username;
             sessionStorage.accessLevel = res.data.accessLevel;
+            sessionStorage.email = this.state.email;
 
             this.setState({ isLogged: true });
           }

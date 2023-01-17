@@ -44,15 +44,21 @@ export default class ProductDetails extends Component {
           <img className="details-img" src={this.state.shoe.image} alt="shoe" />
           <div className="details-div">
             <h4>
-              {this.state.shoe.brand} {this.state.shoe.model}
+              {this.state.shoe.brand} - {this.state.shoe.model}
             </h4>
             <b>Price</b>
             <p className="shoe-cena">{this.state.shoe.price} USD</p>
             <b>Description</b>
             <p className="shoe-desc">{this.state.shoe.description}</p>
-            <div className="add-to-cart">
-              <AddToCart />
-            </div>
+            {this.state.shoe.stock > 0 ? (
+              <div className="add-to-cart">
+                <AddToCart />
+              </div>
+            ) : (
+              <div>
+                <p className="out-of-stock">Out of stock</p>
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Checkout from "./Checkout";
+import PreviousOrders from "./PreviousOrders";
+import { ACCESS_LEVEL_GUEST } from "../../config/global_constants";
 
 export default class Cart extends Component {
   constructor(props) {
@@ -8,6 +10,7 @@ export default class Cart extends Component {
     this.state = {
       cart: JSON.parse(sessionStorage.getItem("cart")),
       total: 0,
+      products: [],
     };
   }
 
@@ -24,6 +27,10 @@ export default class Cart extends Component {
       (total, item) => total + item.price,
       0
     );
+    for (const element of this.state.cart) {
+      this.state.products.push(element._id);
+    }
+    console.log(this.state.products);
     return (
       <div className="cart-page">
         {/* {console.log(this.state.cart)} */}
@@ -46,7 +53,10 @@ export default class Cart extends Component {
               <h3>Total: {this.state.total} USD</h3>
             </div>
             <div className="cart-buttons">
-              <Checkout total={this.state.total} />
+              <Checkout
+                total={this.state.total}
+                products={this.state.products}
+              />
               <button className="continue-shopping">
                 <Link className="cart-links" to={"/shop"}>
                   Continue shopping
@@ -57,6 +67,9 @@ export default class Cart extends Component {
         ) : (
           <h3 className="empty-cart">Your cart is empty</h3>
         )}
+        {sessionStorage.accessLevel > ACCESS_LEVEL_GUEST ? (
+          <PreviousOrders />
+        ) : null}
       </div>
     );
   }

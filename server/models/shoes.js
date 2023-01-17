@@ -8,6 +8,8 @@ let shoesSchema = new mongoose.Schema(
     price: { type: Number },
     description: { type: String },
     image: { type: String },
+    stock: { type: Number },
+    sold_pairs: { type: Number, default: 0 },
   },
   {
     collection: `shoes`,

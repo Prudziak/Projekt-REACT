@@ -21,6 +21,7 @@ export default class Logout extends Component {
       .then((res) => {
         sessionStorage.accessLevel = ACCESS_LEVEL_GUEST;
         sessionStorage.username = "GUEST";
+        sessionStorage.email = "guest";
         this.setState({ isLogged: false });
       })
       .catch((err) => {
