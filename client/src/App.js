@@ -10,7 +10,7 @@ import ProductDetails from "./components/Shop/productDetails";
 import Logout from "./components/Shop/logout";
 import LoggedInRoute from "./components/Shop/LoggedInRoute";
 import Cart from "./components/Cart/Cart";
-import logo from "./images/logo.png";
+import TransactionMessage from "./components/Cart/TransactionMessage";
 
 export default class App extends Component {
   render() {
@@ -35,6 +35,12 @@ export default class App extends Component {
           <Route exact path="/shoes/:brand" component={DisplayProductPage} />
           <Route exact path="/shoes/prod/:id" component={ProductDetails} />
           <Route exact path="/cart" component={Cart} />
+          <Route
+            exact
+            path="/message/:messageType/:orderID"
+            component={TransactionMessage}
+          />
+          "
           <LoggedInRoute exact path="/logout" component={Logout} />
         </Switch>
       </BrowserRouter>

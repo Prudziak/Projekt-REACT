@@ -529,6 +529,7 @@ header > a,
 .details-img {
   height: 50%;
   max-height: 650px;
+  max-width: 800px;
   width: auto;
   align-items: center;
   justify-content: center;
@@ -543,8 +544,8 @@ header > a,
   min-width: 400px;
   font-size: 25px;
   text-align: center;
-  border-width: 1px;
-  border-style: solid;
+  /* border-width: 1px;
+  border-style: solid; */
   align-items: center;
   border-radius: 5px;
   box-shadow: 0px 0px 20px #aaa, -0px -0px 12px #fff;
@@ -579,8 +580,9 @@ header > a,
 
 .add-to-cart button {
   background-color: lightgray;
-  box-shadow: 0px 0px 20px #aaa, -0px -0px 12px #fff;
   border-radius: 5px;
+  border-width: 1px;
+  margin-top: 15px;
 }
 
 .cart-icon {
@@ -768,4 +770,12 @@ header > a,
   color: white;
   font-size: 20px;
   font-weight: 350;
+}
+
+.message-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
 }

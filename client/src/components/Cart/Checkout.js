@@ -1,15 +1,23 @@
 import React, { Component } from "react";
-import PayPalButton from "react-paypal-express-checkout";
 import { SANDBOX_CLIENT_ID } from "../../config/global_constants";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { Redirect } from "react-router-dom";
 
 export default class Checkout extends Component {
-  render() {
-    const environment = "sandbox";
-    const client_id = { sandbox: SANDBOX_CLIENT_ID };
+  constructor(props) {
+    super(props);
+    this.state = {
+      redirectToMessage: false,
+      messageType: null,
+      orderID: null,
+    };
+  }
 
+  render() {
+    const redirect = `/message/${this.state.messageType}/${this.state.orderID}`;
     return (
       <PayPalScriptProvider options={{ "client-id": SANDBOX_CLIENT_ID }}>
+        {this.state.redirectToMessage ? <Redirect to={redirect} /> : null}
         <PayPalButtons
           createOrder={(data, actions) => {
             return actions.order.create({
@@ -24,17 +32,20 @@ export default class Checkout extends Component {
           }}
           onApprove={(data, actions) => {
             return actions.order.capture().then((details) => {
-              const name = details.payer.name.given_name;
-              alert(
-                `Transaction completed by ${name}\nYour order ID: ${data.orderID}`
-              );
+              //const name = details.payer.name.given_name;
+              sessionStorage.cart = JSON.stringify([]);
+              this.setState({
+                redirectToMessage: true,
+                messageType: "success",
+                orderID: data.orderID,
+              });
             });
           }}
           onCancel={(data) => {
-            alert("Transaction cancelled", data);
+            this.setState({ redirectToMessage: true, messageType: "cancel" });
           }}
           onError={(err) => {
-            alert("Transaction error", err);
+            this.setState({ redirectToMessage: true, messageType: "error" });
           }}
         />
       </PayPalScriptProvider>
