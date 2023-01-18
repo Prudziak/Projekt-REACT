@@ -1,15 +1,15 @@
 import { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
-import { ACCESS_LEVEL_GUEST } from "../../config/global_constants";
-import axios from "axios";
-import { SERVER_HOST } from "../../config/global_constants";
+import { Link } from "react-router-dom";
+import {
+  ACCESS_LEVEL_GUEST,
+  ACCESS_LEVEL_NORMAL_USER,
+} from "../../config/global_constants";
 
 export default class Burger extends Component {
   constructor(props) {
     super(props);
     this.state = {
       menuOpen: false,
-      loggedOut: false,
     };
   }
 
@@ -31,6 +31,12 @@ export default class Burger extends Component {
         {this.state.menuOpen && (
           <ul>
             <li>
+              {sessionStorage.accessLevel > ACCESS_LEVEL_NORMAL_USER ? (
+                <Link className="burger-link" to="/admin-panel">
+                  {" "}
+                  Admin{" "}
+                </Link>
+              ) : null}
               <Link className="cart-link" to="/cart">
                 {" "}
                 Cart{" "}

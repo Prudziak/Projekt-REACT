@@ -33,14 +33,12 @@ class DisplayProductPage extends Component {
   render() {
     return (
       <div className="page">
-        <div className="user-info">
-          {sessionStorage.accessLevel > ACCESS_LEVEL_GUEST ? (
-            <div className="welcome">
-              <h5>Welcome {sessionStorage.username} </h5>
-              <Logout />
-            </div>
-          ) : null}
-        </div>
+        {sessionStorage.accessLevel > ACCESS_LEVEL_GUEST ? (
+          <div className="welcome">
+            <h5>Welcome {sessionStorage.username}</h5>
+            <Logout />
+          </div>
+        ) : null}
         <div className="all-shoes">
           {this.state.shoes.map((shoe) => (
             <Link

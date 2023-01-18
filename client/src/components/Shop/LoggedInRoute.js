@@ -8,7 +8,7 @@ const LoggedInRoute = ({ component: Component, exact, path, ...rest }) => (
     exact={exact}
     path={path}
     render={(props) =>
-      localStorage.accessLevel > ACCESS_LEVEL_GUEST ? (
+      sessionStorage.accessLevel > ACCESS_LEVEL_GUEST ? (
         <Component {...props} {...rest} />
       ) : (
         <Redirect to="/" />

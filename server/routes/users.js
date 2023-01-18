@@ -1,10 +1,8 @@
 const router = require(`express`).Router();
-let createError = require("http-errors");
 
 const userModel = require(`../models/users`);
 
 const bcrypt = require(`bcryptjs`);
-const { response } = require("express");
 
 router.get(`/users`, (req, res) => {
   userModel.find((error, data) => {
@@ -13,7 +11,7 @@ router.get(`/users`, (req, res) => {
 });
 
 router.post(`/users/add_admin`, (req, res) => {
-  const adminPassword = `123!@#qweQWE`;
+  const adminPassword = `Haselko123!`;
   bcrypt.hash(
     adminPassword,
     parseInt(process.env.PASSWORD_HASH_SALT_ROUNDS),
@@ -38,7 +36,7 @@ router.post(`/users/add_admin`, (req, res) => {
 });
 
 router.post(
-  `/users/register/:username/:email/:password/:firstname/:lastname/:address`,
+  `/users/register/:username/:email/:password/:firstname/:lastname`,
   (req, res) => {
     userModel.findOne(
       { email: req.params.email },
@@ -57,7 +55,6 @@ router.post(
                   password: hash,
                   firstname: req.params.firstname,
                   lastname: req.params.lastname,
-                  address: req.params.address,
                 },
                 (error, data) => {
                   if (error) {
@@ -77,17 +74,26 @@ router.post(
 router.post(`/users/login/:email/:password`, (req, res) => {
   userModel.findOne({ email: req.params.email }, (error, data) => {
     if (data) {
-      bcrypt.compare(req.params.password, data.password, (error, result) => {
+      bcrypt.compare(req.params.password, data.password, (err, result) => {
         if (result) {
           res.json({ username: data.username, accessLevel: data.accessLevel });
         } else {
-          res.json({ errorMessage: `User is not logged in` });
+          res.json({ errorMessage: `Wrong password` });
         }
       });
     } else {
       console.log("User not found in db");
       res.json({ errorMessage: `User is not logged in` });
     }
+  });
+});
+
+router.delete(`/users/:id`, (req, res, next) => {
+  userModel.findByIdAndRemove(req.params.id, (err, data) => {
+    if (err) {
+      return next(err);
+    }
+    return res.json(data);
   });
 });
 

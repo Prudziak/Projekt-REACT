@@ -13,7 +13,6 @@ export default class RegisterForm extends Component {
       password: "",
       firstname: "",
       lastname: "",
-      address: "",
       isRegistered: false,
     };
   }
@@ -25,7 +24,7 @@ export default class RegisterForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     axios.defaults.withCredentials = true;
-    let url = `${SERVER_HOST}/users/register/${this.state.username}/${this.state.email}/${this.state.password}/${this.state.firstname}/${this.state.lastname}/${this.state.address}`;
+    let url = `${SERVER_HOST}/users/register/${this.state.username}/${this.state.email}/${this.state.password}/${this.state.firstname}/${this.state.lastname}`;
     axios
       .post(url)
       .then((res) => {
@@ -95,14 +94,6 @@ export default class RegisterForm extends Component {
             name={"lastname"}
             placeholder={"Last Name"}
             value={this.state.lastname}
-            onChange={this.handleChange}
-          />
-          <label htmlFor="Address"></label>
-          <input
-            type={"text"}
-            name={"address"}
-            placeholder={"Address"}
-            value={this.state.address}
             onChange={this.handleChange}
           />
           <LinkInClass
