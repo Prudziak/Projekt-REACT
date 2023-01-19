@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Checkout from "./Checkout";
 import PreviousOrders from "./PreviousOrders";
 import { ACCESS_LEVEL_GUEST } from "../../config/global_constants";
+import Logout from "../Shop/logout";
 
 export default class Cart extends Component {
   constructor(props) {
@@ -33,7 +34,12 @@ export default class Cart extends Component {
     console.log(this.state.products);
     return (
       <div className="cart-page">
-        {/* {console.log(this.state.cart)} */}
+        {sessionStorage.accessLevel > ACCESS_LEVEL_GUEST ? (
+          <div className="welcome">
+            <h5>Welcome {sessionStorage.username}</h5>
+            <Logout />
+          </div>
+        ) : null}
         <h2 className="cart-header">Your cart</h2>
         {this.state.cart.length > 0 ? (
           <div className="cart">
@@ -42,7 +48,7 @@ export default class Cart extends Component {
                 <img className="cart-img" src={item.image}></img>
                 <h3>{item.brand}</h3>
                 <h3>{item.model}</h3>
-                <h3>{item.price} USD</h3>
+                <h3>{item.price} $</h3>
                 <button className="remove-from-cart" onClick={this.handleClick}>
                   Remove
                 </button>
@@ -50,7 +56,7 @@ export default class Cart extends Component {
             ))}
             <div className="cart-summary">
               <h3>Summary</h3>
-              <h3>Total: {this.state.total} USD</h3>
+              <h3>Total: {this.state.total} $</h3>
             </div>
             <div className="cart-buttons">
               <Checkout

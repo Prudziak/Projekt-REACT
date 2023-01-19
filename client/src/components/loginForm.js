@@ -48,7 +48,10 @@ export default class LoginForm extends Component {
     return (
       <div className="login-form">
         <form>
-          <label>Log in</label>
+          <label>
+            <img src={require("../images/login.png")} className="login-img" />
+            Sign in
+          </label>
           {console.log(this.state.isLogged)}
           {this.state.isLogged ? <Redirect to="/shop" /> : null}
 
@@ -71,7 +74,7 @@ export default class LoginForm extends Component {
             onChange={this.handleChange}
           />
           <LinkInClass
-            value="Log in"
+            value="Sign in"
             className="normal-button"
             onClick={this.handleSubmit}
           />

@@ -1,10 +1,15 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-import { SERVER_HOST } from "../../config/global_constants";
+import {
+  SERVER_HOST,
+  ACCESS_LEVEL_GUEST,
+  ACCESS_LEVEL_NORMAL_USER,
+} from "../../config/global_constants";
 import AddToCart from "./AddToCart";
 import Logout from "./logout";
-import { ACCESS_LEVEL_GUEST } from "../../config/global_constants";
+import { Link } from "react-router-dom";
+import DeleteProduct from "../AdminComponents/DeleteProduct";
 
 export default class ProductDetails extends Component {
   constructor(props) {
@@ -45,7 +50,7 @@ export default class ProductDetails extends Component {
               {this.state.shoe.brand} - {this.state.shoe.model}
             </h4>
             <b>Price</b>
-            <p className="shoe-cena">{this.state.shoe.price} USD</p>
+            <p className="shoe-cena">{this.state.shoe.price} $</p>
             <b>Description</b>
             <p className="shoe-desc">{this.state.shoe.description}</p>
             {this.state.shoe.stock > 0 ? (
@@ -53,10 +58,21 @@ export default class ProductDetails extends Component {
                 <AddToCart />
               </div>
             ) : (
-              <div>
-                <p className="out-of-stock">Out of stock</p>
+              <div className="no-stock">
+                <p>Out of stock</p>
               </div>
             )}
+            {sessionStorage.accessLevel > ACCESS_LEVEL_NORMAL_USER ? (
+              <div className="admin-buttons">
+                <Link
+                  className="yellow-button"
+                  to={"/edit/" + this.state.shoe._id}
+                >
+                  Edit product
+                </Link>
+                <DeleteProduct />
+              </div>
+            ) : null}
           </div>
         </div>
       </div>

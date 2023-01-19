@@ -12,12 +12,13 @@ import LoggedInRoute from "./components/Shop/LoggedInRoute";
 import Cart from "./components/Cart/Cart";
 import TransactionMessage from "./components/Cart/TransactionMessage";
 import AdminPanel from "./components/AdminComponents/AdminPanel";
+import EditProduct from "./components/AdminComponents/EditProduct";
 
 export default class App extends Component {
   render() {
     return (
       <BrowserRouter id="root">
-        <div>
+        <div className="shop-header">
           <h1
             onClick={() => {
               window.location.href = "http://localhost:3000/";
@@ -25,6 +26,9 @@ export default class App extends Component {
           >
             <img className="shop-icon" src={require("./images/logo.png")} />
           </h1>
+          <div className="shop-mainpage-title">
+            <label>Sneakers Store</label>
+          </div>
           <Burger />
         </div>
 
@@ -45,6 +49,7 @@ export default class App extends Component {
           <LoggedInRoute exact path="/logout" component={Logout} />
           <LoggedInRoute exact path="/admin-panel" component={AdminPanel} />
           <LoggedInRoute exact path="/add-product" component={AddProd} />
+          <LoggedInRoute exact path="/edit/:id" component={EditProduct} />
         </Switch>
         <footer className="footer">Sneakers Store 2023</footer>
       </BrowserRouter>

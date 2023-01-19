@@ -52,7 +52,10 @@ export default class RegisterForm extends Component {
       <div className="register-form">
         <form noValidate={true}>
           {this.state.isRegistered ? <Redirect to="/shop" /> : null}
-          <label>Register</label>
+          <label>
+            <img src={require("../images/login.png")} className="login-img" />
+            Register
+          </label>
           <label htmlFor="username"></label>
           <input
             type="text"

@@ -1,39 +1,49 @@
 import React, { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
-
 import axios from "axios";
+import { SERVER_HOST } from "../../config/global_constants";
+import { Redirect } from "react-router-dom";
 
-import { ACCESS_LEVEL_ADMIN, SERVER_HOST } from "../../config/global_constants";
-
-export default class AddProduct extends Component {
+export default class EditProduct extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      brand: "",
-      model: "",
-      colour: "",
-      price: "",
-      description: "",
-      image: "",
-      stock: "",
-      redirect: false,
+      brand: ``,
+      model: ``,
+      colour: ``,
+      price: ``,
+      description: ``,
+      image: ``,
+      stock: ``,
+      current_id: sessionStorage.current_id,
     };
   }
 
-  handleChange = (event) => {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
+  componentDidMount() {
+    axios
+      .get(`${SERVER_HOST}/shoes/${this.state.current_id}`)
+      .then((res) => {
+        this.setState({
+          brand: res.data.brand,
+          model: res.data.model,
+          colour: res.data.colour,
+          price: res.data.price,
+          description: res.data.description,
+          image: res.data.image,
+          stock: res.data.stock,
+          redirect: false,
+        });
+      })
+      .catch((err) => console.log(err));
+  }
 
-    this.setState({
-      [name]: value,
-    });
+  handleChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleSubmit = (event) => {
-    event.preventDefault();
+  handleSubmit = (e) => {
+    e.preventDefault();
 
-    const product = {
+    const updatedShoe = {
       brand: this.state.brand,
       model: this.state.model,
       colour: this.state.colour,
@@ -43,17 +53,20 @@ export default class AddProduct extends Component {
       stock: this.state.stock,
     };
 
-    axios.post(`${SERVER_HOST}/shoes`, product).then((res) => {
-      console.log(res.data);
+    axios
+      .put(`${SERVER_HOST}/shoes/${this.state.current_id}`, updatedShoe)
+      .catch((err) => console.log(err));
 
-      this.setState({ redirect: true });
-    });
+    this.setState({ redirect: true });
   };
+
   render() {
     return (
       <form className="add-shoe-form" onSubmit={this.handleSubmit}>
-        {this.state.redirect ? <Redirect to="/shop" /> : null}
-        <h2>Add new product</h2>
+        {this.state.redirect ? (
+          <Redirect to={`/shoes/prod/${this.state.current_id}`} />
+        ) : null}
+        <h2>Edit product</h2>
         <label>
           Brand:
           <input
@@ -124,7 +137,7 @@ export default class AddProduct extends Component {
         </label>
         <br />
         <button className="add-prod-link" type="submit">
-          Add product
+          Submit
         </button>
       </form>
     );

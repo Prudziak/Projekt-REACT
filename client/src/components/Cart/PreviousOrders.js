@@ -26,7 +26,7 @@ export default class PreviousOrders extends Component {
       <div className="prev-orders">
         <h3 className="order-head">Previous Orders</h3>
         {this.state.orders.length === 0 ? (
-          <p>You have no previous orders</p>
+          <p className="no-orders">You have no previous orders</p>
         ) : (
           <table className="table">
             <thead className="t-head">

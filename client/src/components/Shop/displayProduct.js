@@ -53,9 +53,9 @@ class DisplayProductPage extends Component {
               key={shoe._id}
             >
               <div className="shoe_display">
-                <div className="card">
+                <div className="card2">
                   <img src={shoe.image} alt="shoe" />
-                  <div className="container">
+                  <div className="container2">
                     <h4>
                       <b>{shoe.brand}</b>
                     </h4>

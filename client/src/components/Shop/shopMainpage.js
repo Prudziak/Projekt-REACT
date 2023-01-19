@@ -19,9 +19,6 @@ export default class ShopMainpage extends Component {
         ) : null}
         <div className="shop-mainpage-content">
           <div className="shop-mainpage-content-center">
-            <div className="shop-mainpage-title">
-              <label>Sneakers Store</label>
-            </div>
             <DisplayCategories />
           </div>
           <DisplayShoes />
