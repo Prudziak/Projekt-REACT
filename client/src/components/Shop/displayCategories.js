@@ -40,9 +40,6 @@ export default class DisplayCategories extends Component {
                 onClick={() => {
                   this.state.current_category = button;
                   sessionStorage.setItem("current_category", button);
-                  console.log(this.state.current_category);
-                  console.log(button);
-                  console.log(this.state);
                 }}
                 className="category-button"
               >

@@ -44,8 +44,6 @@ export default class AddProduct extends Component {
     };
 
     axios.post(`${SERVER_HOST}/shoes`, product).then((res) => {
-      console.log(res.data);
-
       this.setState({ redirect: true });
     });
   };

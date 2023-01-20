@@ -31,7 +31,6 @@ export default class Cart extends Component {
     for (const element of this.state.cart) {
       this.state.products.push(element._id);
     }
-    console.log(this.state.products);
     return (
       <div className="cart-page">
         {sessionStorage.accessLevel > ACCESS_LEVEL_GUEST ? (

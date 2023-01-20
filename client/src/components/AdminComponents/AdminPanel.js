@@ -11,7 +11,6 @@ export default class AdminPanel extends Component {
     super(props);
     this.state = {
       users: [],
-      refresh: false,
     };
   }
 

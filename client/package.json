@@ -15,7 +15,6 @@
     "@paypal/react-paypal-js": "^7.8.2",
     "axios": "^1.2.2",
     "bootstrap": "^5.2.3",
-    "hamburger-react": "^2.5.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",
     "react-dom": "^18.2.0",

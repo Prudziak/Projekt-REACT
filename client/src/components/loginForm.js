@@ -11,6 +11,7 @@ export default class LoginForm extends Component {
       email: "",
       password: "",
       isLogged: false,
+      wrongPassword: false,
     };
   }
 
@@ -30,6 +31,7 @@ export default class LoginForm extends Component {
         if (res.data) {
           if (res.data.errorMessage) {
             console.log(res.data.errorMessage);
+            this.setState({ wrongPassword: true });
           } else {
             console.log("User logged in successfully");
             sessionStorage.username = res.data.username;
@@ -45,6 +47,14 @@ export default class LoginForm extends Component {
   };
 
   render() {
+    let error = "";
+    if (this.state.wrongPassword) {
+      error = (
+        <div>
+          <p className="error">Wrong email or password</p>
+        </div>
+      );
+    }
     return (
       <div className="login-form">
         <form>
@@ -52,8 +62,8 @@ export default class LoginForm extends Component {
             <img src={require("../images/login.png")} className="login-img" />
             Sign in
           </label>
-          {console.log(this.state.isLogged)}
           {this.state.isLogged ? <Redirect to="/shop" /> : null}
+          {error}
 
           <label htmlFor="username"></label>
           <input

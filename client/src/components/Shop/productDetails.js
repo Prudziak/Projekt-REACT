@@ -26,7 +26,6 @@ export default class ProductDetails extends Component {
       .get(`${SERVER_HOST}/shoes/${this.state.current_id}`)
       .then((res) => {
         this.setState({ shoe: res.data });
-        console.log(res.data);
         sessionStorage.setItem("product", JSON.stringify(res.data));
       })
       .catch((err) => {

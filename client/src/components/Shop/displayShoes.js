@@ -42,7 +42,6 @@ export default class DisplayShoes extends Component {
               className="prod-link"
               to={{
                 pathname: `/shoes/prod/${shoe._id}`,
-                // query: { current_id: shoe._id },
               }}
               key={shoe._id}
             >
